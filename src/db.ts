@@ -9,11 +9,8 @@ const firebaseConfig = {
 const dbApp = initializeApp(firebaseConfig)
 const db = getDatabase(dbApp)
 
-function dbRead(id: number, callback: (a: dbSample) => void) {
-  const reference = ref(db, `pieces/${id}`)
-  onValue(reference, (snapshot) => {
-    callback(snapshot.val())
-  }, { onlyOnce: true })
+async function dbRead(id: number) {
+  return await get(child(ref(db), `pieces/${id}`))
 }
 
 async function dbWrite(data: dbSample) {
