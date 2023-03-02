@@ -1,13 +1,14 @@
-type dbSample = {
+type dbSampleDto = {
+  id?: number,
   content: string,
-  createDate: number,
+  created: number,
   password?: string,
   expire?: number,
 }
-type dbResponse = {
+type dbResponseDto = {
   status: number,
   message: string,
   nextID: number
 }
 
-export { dbSample, dbResponse }
+export { dbSampleDto, dbResponseDto }
