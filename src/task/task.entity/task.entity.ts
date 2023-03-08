@@ -5,7 +5,7 @@ export class Task {
   @PrimaryGeneratedColumn()
   id: number
 
-  @Column()
+  @Column({ type: 'mediumtext' })
   content: string
 
   @Column()
@@ -16,4 +16,7 @@ export class Task {
 
   @Column({ type: 'bigint', width: 14 })
   created: number
+
+  @Column()
+  isExpired: boolean
 }

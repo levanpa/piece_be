@@ -11,4 +11,10 @@ type dbResponseDto = {
   nextID: number
 }
 
-export { dbSampleDto, dbResponseDto }
+type returnDataDto = {
+  result: boolean,
+  message: string,
+  [index: string]: any
+}
+
+export { dbSampleDto, dbResponseDto, returnDataDto }

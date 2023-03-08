@@ -37,7 +37,7 @@ async function dbWrite(data: dbSampleDto) {
       content: data.content,
       password: data.password || '',
       expire: data.expire || 0,
-      created: data.createDate || '',
+      created: data.created || '',
     }).then(() => {
       returnData.nextID = nextID
       // increase nextID every time add new one
