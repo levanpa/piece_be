@@ -4,7 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 import { UpdateResult, DeleteResult } from 'typeorm'
 import { dbSampleDto, dbResponseDto, returnDataDto } from '../app.dto'
-import { resolve } from 'path'
+let md5 = require('js-md5')
 
 @Injectable()
 export class TaskService {
@@ -35,6 +35,7 @@ export class TaskService {
     let validate = this.validateTask(task)
 
     if (validate.result) {
+      task.password = task.password ? this.encrypt(task.password) : ''
       response = await this.taskRepo.save(task)
     } else {
       returnData = {
@@ -88,7 +89,7 @@ export class TaskService {
       message: 'password correct',
     }
     let item: Task = await this.findOne(task.id)
-    if (task.password !== item.password) {
+    if (this.encrypt(task.password) !== item.password) {
       returnData = {
         result: false,
         message: 'password incorrect',
@@ -98,6 +99,11 @@ export class TaskService {
     }
 
     return returnData
+  }
+
+  // encrypt by MD5 method
+  encrypt(data: string): string {
+    return md5(data).toString()
   }
 }
 
