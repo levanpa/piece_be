@@ -1,19 +1,18 @@
 type dbSampleDto = {
-  id?: number,
-  content: string,
-  created: number,
-  password?: string,
-  expire?: number,
+  id?: number
+  content: string
+  created: number
+  expire?: number
 }
 type dbResponseDto = {
-  status: number,
-  message: string,
-  nextID: number
+  status: number
+  message: string
+  id: string
 }
 
 type returnDataDto = {
-  result: boolean,
-  message: string,
+  result: boolean
+  message: string
   [index: string]: any
 }
 
