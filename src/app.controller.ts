@@ -9,7 +9,16 @@ export class AppController {
     let data: dbSampleDto
     await dbRead(id).then((snapshot: any) => {
       data = snapshot.val()
+      checkExpire(data)
     })
+
+    function checkExpire(data: dbSampleDto) {
+      if (data.created + data.expire * 60000 < Date.now()) {
+        data.isExpired = true
+        data.content = ''
+      }
+    }
+
     return data
   }
 

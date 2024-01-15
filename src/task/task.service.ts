@@ -11,7 +11,7 @@ export class TaskService {
   constructor(
     @InjectRepository(Task)
     private readonly taskRepo: Repository<Task>,
-  ) { }
+  ) {}
 
   async findAll(): Promise<Task[]> {
     return await this.taskRepo.find()
@@ -29,7 +29,7 @@ export class TaskService {
     let returnData: dbResponseDto = {
       message: 'Saved successfully!',
       status: 1,
-      nextID: 0,
+      id: 0,
     }
     let response: dbSampleDto
     let validate = this.validateTask(task)
@@ -41,7 +41,7 @@ export class TaskService {
       returnData = {
         message: `Validating failed: ${validate.message}`,
         status: 0,
-        nextID: 0
+        id: 0,
       }
       return returnData
     }
@@ -50,10 +50,10 @@ export class TaskService {
       returnData = {
         message: 'Saved failed!',
         status: 0,
-        nextID: response.id
+        id: response.id,
       }
     }
-    returnData.nextID = response.id
+    returnData.id = response.id
     return returnData
   }
 
@@ -65,10 +65,10 @@ export class TaskService {
     return await this.taskRepo.delete(id)
   }
 
-  validateTask(task: Task): { result: boolean, message: string } {
+  validateTask(task: Task): { result: boolean; message: string } {
     let returnData: returnDataDto = {
       result: true,
-      message: 'validate ok'
+      message: 'validate ok',
     }
     if (!JSON.parse(task.content)) {
       returnData.result = false
@@ -106,4 +106,3 @@ export class TaskService {
     return md5(data).toString()
   }
 }
-

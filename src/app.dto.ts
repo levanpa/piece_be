@@ -3,11 +3,12 @@ type dbSampleDto = {
   content: string
   created: number
   expire?: number
+  isExpired?: boolean
 }
 type dbResponseDto = {
   status: number
   message: string
-  id: string
+  id: string | number
 }
 
 type returnDataDto = {
